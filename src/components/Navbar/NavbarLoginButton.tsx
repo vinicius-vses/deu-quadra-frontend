@@ -42,7 +42,7 @@ export function NavbarLoginButton() {
   } else {
     return (
       <Link
-        className=" px-6 py-2 border rounded-md border-green-900 text-green-900"
+        className=" px-6 py-2 border rounded-md border-white-900 text-white-900 hover:bg-white-600"
         to="/login"
       >
         {language?.language.LoginButtonNavbar}

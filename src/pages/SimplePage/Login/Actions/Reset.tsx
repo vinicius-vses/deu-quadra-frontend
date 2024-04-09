@@ -5,10 +5,8 @@ import { useApi } from '@src/api/api';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../../../contexts/Auth';
 import { LanguageContext } from '../../../../contexts/Language';
-import { ResetPasswordPage } from '../ResetPasswordPage';
-import Reset from './Reset';
 
-export function Login() {
+export function Reset() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -51,7 +49,7 @@ export function Login() {
 
   return (
     <div className="p-6 bg-white shadow-md rounded-lg mb-3">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Login</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center">Esqueci a minha senha</h2>
       <form onSubmit={handleLogin}>
         <TextInput
           label="Email"
@@ -61,19 +59,7 @@ export function Login() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder={language.emailButtonPlaceholder}
         />
-        <TextInput
-          label={language.passwordLabel}
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder={language.passwordButtonPlaceholder}
-          />
-          <div className="flex justify-between items-center mt-3">
-          <a href="/Reset" className="text-sm text-blue-500 hover:underline">Esqueci minha senha</a>
-          </div>
-               <div className="flex w-full justify-between px-2 mt-3">
-          
+        <div className="flex w-full justify-between px-2 mt-3">
         <button
             type="button"
             className="bg-green-500 text-white p-2 rounded-md mt-3 mx-auto hover:bg-blue-600"
@@ -82,16 +68,15 @@ export function Login() {
             Voltar
           </button>
           <button
-            type="submit"
+            type="Enviar"
             className="bg-green-500 text-white p-2 rounded-md mt-3 mx-auto hover:bg-blue-600"
           >
             {language.LoginPageButton}
           </button>
-          
-          </div>
+        </div>
       </form>
     </div>
   );
 }
 
-export default Login;
+export default Reset;
