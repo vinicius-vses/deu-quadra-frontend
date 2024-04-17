@@ -10,7 +10,7 @@ import { Map } from './Map/Map';
 import { LanguageContext } from '../../../contexts/Language';
 
 export function SearchPage() {
-  const { getCourts } = useApi();
+  const { getEmpresasLatLong } = useApi();
   const [courts, setCourts] = useState([]);
   const [distance, setDistance] = useState(10); // Estado para controlar a distância selecionada
   const [isLoading, setLoading] = useState(true);
@@ -30,10 +30,11 @@ export function SearchPage() {
         (position) => {
           const { latitude, longitude } = position.coords;
 
-          getCourts(latitude, longitude, distance).then(({ data }) => {
+          getEmpresasLatLong(latitude, longitude, distance).then(({ data }) => {
             setPosition({ lat: latitude, lon: longitude });
             setCourts(data);
             setLoading(false);
+            console.log(data)
           });
         },
         (error) => {
@@ -52,18 +53,6 @@ export function SearchPage() {
     setDistance(newDistance); // Atualizar o estado da distância
   };
 
-  const handleShowAllResults = () => {
-    setLoading(true);
-    getCourts(position.lat, position.lon, -1) // Usar -1 como distância para mostrar todos
-      .then(({ data }) => {
-        setCourts(data);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar todos os resultados:', error);
-      })
-      .finally(() => setLoading(false));
-  };
-
   const distanceOptions = [1, 3, 5, 8, 10];
 
   return (
@@ -79,12 +68,12 @@ export function SearchPage() {
         <div>
           {!isLoading && <Map {...position} courts={courts} distance={distance}></Map>}
         </div>
-       
+
         <div className="p-10 grid grid-cols-3 gap-10 bg-white">
           <form className="col-span-1 bg-green-200 rounded-md border border-green-400 p-10">
             <TextInput
               placeholder={languageContext.language.searchPageTextFieldPlaceholder}
-                          />
+            />
             {distanceOptions.map((option) => (
               <div key={option}>
                 <label>
@@ -97,20 +86,18 @@ export function SearchPage() {
                   />{' '}
                   {option} km
                 </label>
-                  </div>
-                          ))}
-                           <button className="bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-400 text-sm self-start" onClick={handleShowAllResults}>
-             <i>Todas as Quadras</i> 
-            </button>
+              </div>
+            ))}
+            {/* Repita o processo para outras distâncias, se necessário */}
           </form>
-          <div className="col-span-2 flex flex-col gap-5">
+          <div className="flex flex-col gap-5 col-span-2">
             <div className="flex flex-row gap-1 items-center">
               <span className="text-2xl">{courts.length}</span>
               <span className="text-xl font-light">
                 {languageContext.language.courstToRent(distance, 'São Paulo')}
               </span>
             </div>
-             {courts.map((data, index) => {
+            {courts.map((data, index) => {
               return <Card key={index} props={data}></Card>;
             })}
           </div>

@@ -14,7 +14,7 @@ export function NavbarLoginButton() {
       <div className="flex flex-row gap-4">
         <div className="flex flex-col items-end">
           <div className="text-sm">
-            {language?.language.welcome} <span className="font-bold">Matheus</span>
+            {language?.language.welcome} <span className="font-bold"> USUARIO LOCADOR</span>
           </div>
           <button
             onClick={() => {
@@ -42,7 +42,7 @@ export function NavbarLoginButton() {
   } else {
     return (
       <Link
-        className=" px-6 py-2 border rounded-md border-white-900 text-white-900 hover:bg-white-600"
+        className=" px-6 py-2 border rounded-md border-green-900 text-green-900"
         to="/login"
       >
         {language?.language.LoginButtonNavbar}

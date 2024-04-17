@@ -42,7 +42,6 @@ function Navbar({ className }: NavbarProps) {
           </Link>
           <div>
             <NavbarLoginButton />
-            <Link to="/presignup" className="text-white ml-4">Cadastre-se</Link>
           </div>
         </div>
       </nav>
