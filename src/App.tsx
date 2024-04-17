@@ -19,6 +19,11 @@ import { LanguageProvider } from './hooks/Language';
 import { LocadorPage } from './pages/SimplePage/Locador/LocadorPage';
 import { IncluirQuadraPage } from './pages/SimplePage/Quadra/IncluirQuadra';
 import { InfosQuadraPage } from './pages/SimplePage/Quadra/InfosQuadraPage';
+import { SignupPage } from './pages/SimplePage/Login/SignupPage';
+import { ResetPasswordPage } from './pages/SimplePage/Login/ResetPasswordPage';
+import { PresignupPage } from './pages/SimplePage/Login/PresignupPage';
+import { SignupUserPage } from './pages/SimplePage/Login/SignupUserPage';
+
 
 
 
@@ -36,6 +41,10 @@ export function App() {
               <Routes>
                 <Route path="/" element={<LandingPage />}></Route>
                 <Route path="/login" element={<LoginPage />}></Route>
+                <Route path="/signup" element={<SignupPage/>}></Route>
+                <Route path="/signupuser" element={<SignupUserPage />}></Route>
+                <Route path="/presignup" element={<PresignupPage />}></Route>
+                <Route path="/reset" element={<ResetPasswordPage />}></Route>
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/novaQuadra" element={<IncluirQuadraPage />} />
                 <Route path="/infosQuadra/:id" element={<InfosQuadraPage />} />
