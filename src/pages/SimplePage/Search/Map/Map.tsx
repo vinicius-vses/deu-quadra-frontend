@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
+import "leaflet/dist/images/marker-shadow.png";
+import "leaflet/dist/images/marker-icon.png";
 import { Circle, MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import { CardProps } from '../Card/Card';
 
