@@ -40,9 +40,11 @@ function Navbar({ className }: NavbarProps) {
           <Link to="/">
             <Logo lightMode={true}></Logo>
           </Link>
-          <div>
+          <div className="flex items-center">
             <NavbarLoginButton />
-            <Link to="/presignup" className="text-white ml-4">Cadastre-se</Link>
+            {!auth.isAuthenticated && (
+              <Link to="/presignup" className="text-white ml-4">Cadastre-se</Link>
+            )}
           </div>
         </div>
       </nav>
