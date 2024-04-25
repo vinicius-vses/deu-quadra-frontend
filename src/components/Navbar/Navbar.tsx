@@ -40,7 +40,7 @@ function Navbar({ className }: NavbarProps) {
           <Link to="/">
             <Logo lightMode={true}></Logo>
           </Link>
-          <div className="flex items-center">
+          <div className="hidden md:flex items-center"> {/* Ocultar em telas menores que médio */}
             <NavbarLoginButton />
             {!auth.isAuthenticated && (
               <Link to="/presignup" className="text-white ml-4">Cadastre-se</Link>
@@ -48,8 +48,39 @@ function Navbar({ className }: NavbarProps) {
           </div>
         </div>
       </nav>
+      {/* Adicionando o menu inferior */}
+      <BottomMenu />
     </div>
   );
 }
+
+// Novo componente BottomMenu
+function BottomMenu() {
+  return (
+    <nav className="fixed bottom-0 left-0 w-full bg-green-500 p-2 h-[40px]">
+      <div className="container max-w-screen-lg mx-auto px-4 h-full flex items-center justify-between">
+        <div className="flex items-center">
+          <div className="flex"> {/* Adicionando display flex para agrupar os links */}
+            <Link to="/" className="text-white mr-4">Home</Link>
+            <Link to="/privacy-policy" className="text-white mr-4">Políticas de Privacidade</Link>
+            <Link to="/terms-of-use" className="text-white mr-4">Termos de Uso</Link>
+          </div>
+        </div>
+        <div className="flex items-center">
+          <div className="flex"> {/* Adicionando display flex para agrupar os links */}
+            <a href="https://www.youtube.com/@deuQuadra" target="_blank" rel="noopener noreferrer" className="text-white mr-4">
+              YouTube
+            </a>
+            <a href="https://github.com/deuquadra" target="_blank" rel="noopener noreferrer" className="text-white mr-4">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+
 
 export default Navbar;
