@@ -4,7 +4,7 @@ import { SignupOutput } from './endpointsOutput';
 
 export interface AuthResult {
   login: (email: string, password: string)=> Promise<AxiosResponse<LoginOutput, any>>;
-  signup: (name: string, email: string, password: string, cpfCnpj: string, address: string, cep: string, state: string, city: string, phone: string) => Promise<AxiosResponse<SignupOutput, any>>;
+  signup: (nome: string, email: string, password: string, identificador: string, address: string, cep: string, state: string, city: string, phone: string) => Promise<AxiosResponse<SignupOutput, any>>;
 }
 
 export function useApi(): AuthResult {
@@ -22,12 +22,12 @@ export function useApi(): AuthResult {
     });
   }
 
-  async function signup(name: string, email: string, password: string, cpfCnpj: string, address: string, cep: string, state: string, city: string, phone: string): Promise<AxiosResponse<SignupOutput, any>> {
+  async function signup(nome: string, email: string, password: string, identificador: string, address: string, cep: string, state: string, city: string, phone: string): Promise<AxiosResponse<SignupOutput, any>> {
     return client.post<SignupOutput>('/locador/signup', {
-      name,
+      nome,
       email,
       password,
-      cpfCnpj,
+      identificador,
       address,
       cep,
       state,
