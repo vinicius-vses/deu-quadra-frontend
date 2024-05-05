@@ -31,7 +31,7 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 }
 
 var marcador = L.icon({
-  iconUrl: 'src/pages/SimplePage/Search/pin.png',
+  iconUrl: 'pages/SimplePage/Search/pin.png',
   iconSize: [30,30],
 });
 
