@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
-import "leaflet/dist/images/marker-shadow.png";
-import "leaflet/dist/images/marker-icon.png";
 import { Circle, MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import { CardProps } from '../Card/Card';
+import L from 'leaflet';
 
 export interface MapProps {
   lat: number;
@@ -30,6 +29,11 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   const d = R * c; // Distance in km
   return d;
 }
+
+var marcador = L.icon({
+  iconUrl: 'src/pages/SimplePage/Search/pin.png',
+  iconSize: [30,30],
+});
 
 export function Map(props: MapProps) {
   const map = new Set();
@@ -65,6 +69,7 @@ export function Map(props: MapProps) {
           <Marker
             position={[court.lat, court.lon]}
             key={court.idEmpresa}
+            icon={marcador}
           >
             <Popup>
               <span>
