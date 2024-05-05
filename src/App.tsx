@@ -19,10 +19,10 @@ import { LanguageProvider } from './hooks/Language';
 import { LocadorPage } from './pages/SimplePage/Locador/LocadorPage';
 import { IncluirQuadraPage } from './pages/SimplePage/Quadra/IncluirQuadra';
 import { InfosQuadraPage } from './pages/SimplePage/Quadra/InfosQuadraPage';
-import { SignupPage } from './pages/SimplePage/Login/SignupPage';
+import { Signuplocatariopage } from './pages/SimplePage/Login/Signuplocatariopage';
 import { ResetPasswordPage } from './pages/SimplePage/Login/ResetPasswordPage';
 import { PresignupPage } from './pages/SimplePage/Login/PresignupPage';
-import { SignupUserPage } from './pages/SimplePage/Login/SignupUserPage';
+import { Signuplocadorpage } from './pages/SimplePage/Login/Signuplocadorpage';
 
 
 
@@ -41,8 +41,8 @@ export function App() {
               <Routes>
                 <Route path="/" element={<LandingPage />}></Route>
                 <Route path="/login" element={<LoginPage />}></Route>
-                <Route path="/signup" element={<SignupPage/>}></Route>
-                <Route path="/signupuser" element={<SignupUserPage />}></Route>
+                <Route path="/signuplocador" element={<Signuplocadorpage/>}></Route>
+                <Route path="/signuplocatario" element={<Signuplocatariopage />}></Route>
                 <Route path="/presignup" element={<PresignupPage />}></Route>
                 <Route path="/reset" element={<ResetPasswordPage />}></Route>
                 <Route path="/search" element={<SearchPage />} />

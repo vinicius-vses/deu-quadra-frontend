@@ -19,14 +19,14 @@ export function Presignup() {
             <button
               type="button"
               className="bg-green-500 text-white px-4 py-2 rounded-md mr-4 hover:bg-blue-600"
-              onClick={() => navigate('/signupuser')}
+              onClick={() => navigate('/signuplocatario')}
             >
               Quero Alugar uma Quadra
             </button>
             <button
               type="button"
               className="bg-green-500 text-white px-4 py-2 rounded-md mr-4 hover:bg-blue-600"
-              onClick={() => navigate('/signup')}
+              onClick={() => navigate('/signuplocador')}
             >
               Quero anunciar minha Quadra
             </button>
