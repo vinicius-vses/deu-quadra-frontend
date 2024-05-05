@@ -23,7 +23,8 @@ import { Signuplocatariopage } from './pages/SimplePage/Login/Signuplocatariopag
 import { ResetPasswordPage } from './pages/SimplePage/Login/ResetPasswordPage';
 import { PresignupPage } from './pages/SimplePage/Login/PresignupPage';
 import { Signuplocadorpage } from './pages/SimplePage/Login/Signuplocadorpage';
-
+import { CadastroLocadorPage } from './pages/SimplePage/Cadastro/CadastroLocadorPage';
+import { CadastroEmpresaPage } from './pages/SimplePage/Cadastro/CadastroEmpresaPage';
 
 
 
@@ -41,13 +42,15 @@ export function App() {
               <Routes>
                 <Route path="/" element={<LandingPage />}></Route>
                 <Route path="/login" element={<LoginPage />}></Route>
-                <Route path="/signuplocador" element={<Signuplocadorpage/>}></Route>
+                <Route path="/signuplocador" element={<CadastroLocadorPage/>}></Route>
                 <Route path="/signuplocatario" element={<Signuplocatariopage />}></Route>
                 <Route path="/presignup" element={<PresignupPage />}></Route>
                 <Route path="/reset" element={<ResetPasswordPage />}></Route>
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/novaQuadra" element={<IncluirQuadraPage />} />
                 <Route path="/infosQuadra/:id" element={<InfosQuadraPage />} />
+                <Route path="/cadastroLocador" element={<CadastroLocadorPage />} />
+                <Route path="/cadastroEmpresa" element={<CadastroEmpresaPage />} />
                 <Route
                   path="/allocate/:id"
                   element={
