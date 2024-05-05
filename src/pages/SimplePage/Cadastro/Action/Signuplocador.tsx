@@ -44,7 +44,7 @@ export function Signuplocador() {
 
       console.log(response.data);
       window.alert('USUARIO CADASTRADO COM SUCESSO!');
-      navigate('/novaQuadra/');
+      navigate('/cadastroEmpresa/');
 
       if (response.status === 200) {
         console.log('USUARIO created successfully!');
