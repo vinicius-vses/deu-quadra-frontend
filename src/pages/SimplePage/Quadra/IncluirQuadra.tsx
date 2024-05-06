@@ -12,9 +12,12 @@ export function IncluirQuadraPage() {
   const [courtPrice, setCourtPrice] = useState('');
   const [courtDescription, setCourtDescription] = useState('');
   const [companyId] = useState(1); // Assuming a default company ID
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleCourtSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const response = await axios.post('http://localhost:8080/courts', {
@@ -35,11 +38,9 @@ export function IncluirQuadraPage() {
       }
     } catch (error) {
       console.error('Error creating court:', error);
-      window.alert(
-        'ERRO AO CADASTRAR QUADRA, TENTE NOVAMENTE EM INSTANTES! ERRO:' +
-          error
-      );
-      // Handle error cases (e.g., display an error message)
+      setError('ERRO AO CADASTRAR QUADRA, TENTE NOVAMENTE EM INSTANTES! ERRO:' + error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -86,12 +87,17 @@ export function IncluirQuadraPage() {
                 <option value="volei">Vôlei</option>
               </select>
             </div>
-            <button
-              type="submit"
-              className="bg-green-500 text-white p-2 rounded-md mx-auto hover:bg-blue-600"
-            >
-              CADASTRAR
-            </button>
+            {isLoading ? (
+              <p>Enviando dados...</p>
+            ) : (
+              <button
+                type="submit"
+                className="bg-green-500 text-white p-2 rounded-md mx-auto hover:bg-blue-600"
+              >
+                CADASTRAR
+              </button>
+            )}
+            {error && <p className="text-red-500">{error}</p>}
           </form>
         </div>
       </div>
