@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useEffect, useState } from 'react';
+import React, { FormEvent, useContext, useState } from 'react';
 import TextInput from '@components/TextInput';
 import { useModal } from '@src/hooks/Modal';
 import { useApi } from '@src/api/api';
@@ -8,49 +8,36 @@ import { LanguageContext } from '../../../../contexts/Language';
 
 export function Reset() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   const auth = useContext(AuthenticationContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth?.isAuthenticated) {
-      navigate('/');
-    }
-  }, []);
-  console.log(auth);
-
-  const { login } = useApi();
   const { openModal } = useModal();
   const { language } = useContext(LanguageContext)!;
 
-  function handleLogin(event: FormEvent) {
+  async function handleReset(event: FormEvent) {
     event.preventDefault();
-
-    login(email, password)
-      .then(({ data }) => {
-        auth!.setTokens({
-          authToken: {
-            token: data.accessToken,
-            expiresIn: new Date(),
-          },
-          refreshToken: {
-            expiresIn: new Date(),
-            token: 'a',
-          },
-        });
-
-        navigate('/');
-      })
-      .catch((error: any) => {
-        openModal('Erro', error.response.data.message);
+    try {
+      const response = await fetch('/api/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
       });
+      if (response.ok) {
+        openModal('Success', 'Um e-mail de redefinição de senha foi enviado para o seu endereço de e-mail.');
+      } else {
+        const data = await response.json();
+        openModal('Erro', data.message);
+      }
+    } catch (error) {
+      openModal('Erro', 'Ocorreu um erro ao processar sua solicitação.');
+    }
   }
 
   return (
     <div className="p-6 bg-white shadow-md rounded-lg mb-3">
       <h2 className="text-2xl font-semibold mb-4 text-center">Esqueci a minha senha</h2>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleReset}>
         <TextInput
           label="Email"
           type="email"
@@ -60,7 +47,7 @@ export function Reset() {
           placeholder={language.emailButtonPlaceholder}
         />
         <div className="flex w-full justify-between px-2 mt-3">
-        <button
+          <button
             type="button"
             className="bg-green-500 text-white p-2 rounded-md mt-3 mx-auto hover:bg-blue-600"
             onClick={() => navigate('/')}
@@ -68,10 +55,10 @@ export function Reset() {
             Voltar
           </button>
           <button
-            type="Enviar"
+            type="submit"
             className="bg-green-500 text-white p-2 rounded-md mt-3 mx-auto hover:bg-blue-600"
           >
-            {language.LoginPageButton}
+            Enviar
           </button>
         </div>
       </form>
