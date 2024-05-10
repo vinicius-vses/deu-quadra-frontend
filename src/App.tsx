@@ -23,6 +23,7 @@ import { Signuplocatariopage } from './pages/SimplePage/Login/Signuplocatariopag
 import { ResetPasswordPage } from './pages/SimplePage/Login/ResetPasswordPage';
 import { PresignupPage } from './pages/SimplePage/Login/PresignupPage';
 import { Signuplocadorpage } from './pages/SimplePage/Login/Signuplocadorpage';
+import {CadastroEmpresaPage} from './pages/SimplePage/Cadastro/CadastroEmpresaPage';
 
 
 
@@ -48,22 +49,9 @@ export function App() {
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/novaQuadra" element={<IncluirQuadraPage />} />
                 <Route path="/infosQuadra/:id" element={<InfosQuadraPage />} />
-                <Route
-                  path="/allocate/:id"
-                  element={
-                    <GuardedRoute>
-                      <AllocatePage />
-                    </GuardedRoute>
-                  }
-                />
-                <Route
-                  path="/empresa/:id"
-                  element={
-                    <GuardedRoute>
-                      <LocadorPage />
-                    </GuardedRoute>
-                  }
-                />
+                <Route path="/company" element={<CadastroEmpresaPage />} />
+                <Route path="/allocate/:id" element={<GuardedRoute><AllocatePage /></GuardedRoute>}/>
+                <Route path="/empresa/:id"  element={<GuardedRoute><LocadorPage /></GuardedRoute>}/>
               </Routes>
             </Router>
           </AuthenticationContext.Provider>

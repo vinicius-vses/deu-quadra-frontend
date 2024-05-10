@@ -62,8 +62,8 @@ function BottomMenu() {
         <div className="flex items-center">
           <div className="flex"> {/* Adicionando display flex para agrupar os links */}
             <Link to="/" className="text-white mr-4">Home</Link>
-            <Link to="/privacy-policy" className="text-white mr-4">Políticas de Privacidade</Link>
-            <Link to="/terms-of-use" className="text-white mr-4">Termos de Uso</Link>
+            <Link to="/empresa/1" className="text-white mr-4">Minha Área</Link>
+            <Link to="/search" className="text-white mr-4">Search</Link>
           </div>
         </div>
         <div className="flex items-center">
@@ -80,7 +80,5 @@ function BottomMenu() {
     </nav>
   );
 }
-
-
 
 export default Navbar;

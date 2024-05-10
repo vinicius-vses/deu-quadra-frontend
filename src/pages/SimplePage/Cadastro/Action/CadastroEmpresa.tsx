@@ -1,40 +1,57 @@
-import React, { FormEvent, useContext, useEffect, useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { FormEvent } from 'react';
 import TextInput from '@components/TextInput';
 import { useModal } from '@src/hooks/Modal';
-import { useApi } from '@src/hooks/hooks'; // Importando o hook recém-criado
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { AuthenticationContext } from '../../../../contexts/Auth';
 import { LanguageContext } from '../../../../contexts/Language';
-import axios from 'axios';
 
 export function CadastroEmpresa() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [identificador, setIdentificador] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [cep, setCep] = useState('');
   const [numero, setNumero] = useState('');
   const [rua, setRua] = useState('');
   const [bairro, setBairro] = useState('');
-  const [cep, setCep] = useState('');
   const [estado, setEstado] = useState('');
   const [cidade, setCidade] = useState('');
-  const [telefone, setTelefone] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [error, setError] = useState('');
 
   const auth = useContext(AuthenticationContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth?.isAuthenticated) {
-      navigate('/');
-    }
-  }, []);
-
-  const { signup } = useApi();
   const { openModal } = useModal();
   const { language } = useContext(LanguageContext)!;
+  const navigate = useNavigate();
 
-  async function fetchAddressFromCEP(cep) {
+  const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:8080/companies', {
+        nome: nome,
+        email: email,
+        identificador: identificador,
+        telefone: telefone,
+        cep: cep,
+        numero: numero,
+        rua: rua,
+        bairro: bairro,
+        estado: estado,
+        cidade: cidade
+      });
+
+      console.log(response.data);
+      setSuccessMessage('Empresa cadastrada com sucesso!');
+    } catch (error) {
+      console.error('Error creating company:', error);
+      setError('Erro ao cadastrar empresa, tente novamente mais tarde.');
+    }
+  };
+
+  const fetchAddressFromCEP = async (cep: string) => {
     try {
       const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
       const data = await response.json();
@@ -51,62 +68,73 @@ export function CadastroEmpresa() {
       console.error('Erro ao buscar CEP:', error);
       openModal('Erro', 'Erro ao buscar CEP');
     }
-  }
+  };
 
-  function handleCEPChange(event) {
+  const handleCEPChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setCep(value);
 
-    // Verifica se o CEP tem 8 dígitos para evitar requisições desnecessárias
-    if (value.length === 8) {
+    // Verifica se o CEP possui 8 dígitos e contém apenas números
+    if (/^\d{8}$/.test(value)) {
       fetchAddressFromCEP(value);
+    } else {
+      setError('Formato de CEP inválido');
     }
-  }
+  };
 
-    const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-  
-      try {
-        const response = await axios.post('http://localhost:8080/companies', {
-          nome: nome,
-          email: email,
-          password: password,
-          identificador: identificador,
-        });
-  
-        console.log(response.data);
-        window.alert('USUARIO CADASTRADO COM SUCESSO!');
-        navigate('/novaQuadra/');
-  
-        if (response.status === 200) {
-          console.log('USUARIO created successfully!');
-          // Handle any other logic here (e.g., redirect, display a success message)
-        }
-      } catch (error) {
-        console.error('Error creating USUARIO:', error);
-        window.alert(
-          'ERRO AO CADASTRAR USUARIO, TENTE NOVAMENTE EM INSTANTES! ERRO:' +
-            error
-        );
-        // Handle error cases (e.g., display an error message)
-      }
-    };
-
-  function handleOkClick() {
+  const handleOkClick = () => {
     setSuccessMessage('');
-    navigate('/login');
-  }
+    navigate('/'); // Pode ser redirecionado para a página desejada após clicar em "OK"
+  };
 
   return (
     <>
       {!successMessage && (
-       
-          <div className="flex justify-center items-center h-screen">
-      <div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Cadastre-se</h2>
-        <h2 className="text-1xl font-semibold mb-4 text-center">Para anunciar uma quadra</h2>
+        <div className="flex justify-center items-center h-screen">
+          <div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full sm:w-3/4 md:w-1/2 lg:w-1/2 xl:w-1/3">
+            <h2 className="text-2xl font-semibold mb-4 text-center">Cadastre sua empresa</h2>
             <form onSubmit={handleSignup} className="flex flex-wrap">
-              <div className="w-full px-2 sm:w-1/2">
+              <div className="w-full px-2 md:w-1/2">
+                <TextInput
+                  label="Nome"
+                  type="text"
+                  id="nome"
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                  placeholder="Informe o nome da empresa"
+                />
+              </div>
+              <div className="w-full px-2 md:w-1/2">
+                <TextInput
+                  label="Email"
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Informe o email da empresa"
+                />
+              </div>
+              <div className="w-full px-2 md:w-1/2">
+                <TextInput
+                  label="Identificador"
+                  type="text"
+                  id="identificador"
+                  value={identificador}
+                  onChange={(e) => setIdentificador(e.target.value)}
+                  placeholder="Informe o CNPJ da empresa"
+                />
+              </div>
+              <div className="w-full px-2 md:w-1/2">
+                <TextInput
+                  label="Telefone"
+                  type="text"
+                  id="telefone"
+                  value={telefone}
+                  onChange={(e) => setTelefone(e.target.value)}
+                  placeholder="Informe o telefone da empresa"
+                />
+              </div>
+              <div className="w-full px-2 md:w-1/2">
                 <TextInput
                   label="CEP"
                   type="text"
@@ -116,7 +144,7 @@ export function CadastroEmpresa() {
                   placeholder="Informe o CEP"
                 />
               </div>
-              <div className="w-full px-2 sm:w-1/2">
+              <div className="w-full px-2 md:w-1/2">
                 <TextInput
                   label="Número"
                   type="text"
@@ -126,7 +154,7 @@ export function CadastroEmpresa() {
                   placeholder="Informe o número"
                 />
               </div>
-              <div className="w-full px-2 sm:w-1/2">
+              <div className="w-full px-2 md:w-1/2">
                 <TextInput
                   label="Rua"
                   type="text"
@@ -136,7 +164,7 @@ export function CadastroEmpresa() {
                   placeholder="Informe a rua"
                 />
               </div>
-              <div className="w-full px-2 sm:w-1/2">
+              <div className="w-full px-2 md:w-1/2">
                 <TextInput
                   label="Bairro"
                   type="text"
@@ -146,7 +174,7 @@ export function CadastroEmpresa() {
                   placeholder="Informe o bairro"
                 />
               </div>
-              <div className="w-full px-2 sm:w-1/2">
+              <div className="w-full px-2 md:w-1/2">
                 <TextInput
                   label="Estado"
                   type="text"
@@ -156,7 +184,7 @@ export function CadastroEmpresa() {
                   placeholder="Informe o estado"
                 />
               </div>
-              <div className="w-full px-2 sm:w-1/2">
+              <div className="w-full px-2 md:w-1/2">
                 <TextInput
                   label="Cidade"
                   type="text"
@@ -171,7 +199,7 @@ export function CadastroEmpresa() {
                   <button
                     type="button"
                     className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
-                    onClick={() => navigate('/presignup')}
+                    onClick={() => navigate(-1)}
                   >
                     Voltar
                   </button>
@@ -179,11 +207,12 @@ export function CadastroEmpresa() {
                     type="submit"
                     className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
                   >
-                    {language.LoginPageButton}
+                    Cadastrar
                   </button>
                 </div>
               </div>
             </form>
+            {error && <p className="text-red-500 text-center">{error}</p>}
           </div>
         </div>
       )}
@@ -200,5 +229,3 @@ export function CadastroEmpresa() {
     </>
   );
 }
-
-export default CadastroEmpresa;

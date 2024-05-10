@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SimplePage } from '../SimplePage';
 import { CadastroEmpresa } from './Action/CadastroEmpresa';
-import { Signuplocatario } from './Actions/Signuplocatario'; // Corrigido a sintaxe da importação
+
 
 enum Actions {
   LOGIN,

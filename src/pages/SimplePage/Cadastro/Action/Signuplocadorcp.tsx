@@ -8,7 +8,7 @@ import { LanguageContext } from '../../../../contexts/Language';
 import axios from 'axios';
 
 
-export function Signuplocador() {
+export function Signuplocadorcp() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -150,4 +150,4 @@ export function Signuplocador() {
   );
 }
 
-export default Signuplocador;
+export default Signuplocadorcp;
