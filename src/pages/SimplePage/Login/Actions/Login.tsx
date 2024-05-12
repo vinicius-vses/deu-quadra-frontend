@@ -31,7 +31,7 @@ export function Login() {
       .then(({ data }) => {
         auth!.setTokens({
           authToken: {
-            token: data.accessToken,
+            token: data,
             expiresIn: new Date(),
           },
           refreshToken: {
