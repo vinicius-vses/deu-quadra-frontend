@@ -18,6 +18,8 @@ export function CadastroEmpresa() {
   const [bairro, setBairro] = useState('');
   const [estado, setEstado] = useState('');
   const [cidade, setCidade] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [error, setError] = useState('');
 
@@ -32,15 +34,15 @@ export function CadastroEmpresa() {
     try {
       const response = await axios.post('http://localhost:8080/companies', {
         nome: nome,
-        email: email,
-        identificador: identificador,
         telefone: telefone,
         cep: cep,
         numero: numero,
         rua: rua,
         bairro: bairro,
         estado: estado,
-        cidade: cidade
+        cidade: cidade,
+        lat: latitude,
+        lon: longitude
       });
 
       console.log(response.data);
@@ -102,26 +104,6 @@ export function CadastroEmpresa() {
                   value={nome}
                   onChange={(e) => setNome(e.target.value)}
                   placeholder="Informe o nome da empresa"
-                />
-              </div>
-              <div className="w-full px-2 md:w-1/2">
-                <TextInput
-                  label="Email"
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Informe o email da empresa"
-                />
-              </div>
-              <div className="w-full px-2 md:w-1/2">
-                <TextInput
-                  label="Identificador"
-                  type="text"
-                  id="identificador"
-                  value={identificador}
-                  onChange={(e) => setIdentificador(e.target.value)}
-                  placeholder="Informe o CNPJ da empresa"
                 />
               </div>
               <div className="w-full px-2 md:w-1/2">
@@ -191,6 +173,26 @@ export function CadastroEmpresa() {
                   id="cidade"
                   value={cidade}
                   onChange={(e) => setCidade(e.target.value)}
+                  placeholder="Informe a cidade"
+                />
+              </div>
+              <div className="w-full px-2 md:w-1/2">
+                <TextInput
+                  label="Latitute"
+                  type="double"
+                  id="latitude"
+                  value={latitude}
+                  onChange={(e) => setLatitude(e.target.value)}
+                  placeholder="Informe a cidade"
+                />
+              </div>
+              <div className="w-full px-2 md:w-1/2">
+                <TextInput
+                  label="Longitute"
+                  type="double"
+                  id="longitude"
+                  value={longitude}
+                  onChange={(e) => setLongitude(e.target.value)}
                   placeholder="Informe a cidade"
                 />
               </div>
