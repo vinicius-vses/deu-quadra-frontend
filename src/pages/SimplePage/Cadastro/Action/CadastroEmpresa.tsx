@@ -32,7 +32,7 @@ export function CadastroEmpresa() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/companies', {
+      const response = await axios.post('http://54.209.227.225:8080/companies', {
         nome: nome,
         telefone: telefone,
         cep: cep,
