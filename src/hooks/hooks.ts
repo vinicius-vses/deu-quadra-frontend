@@ -3,8 +3,9 @@ import { useAuth } from './Auth';
 import { SignupOutput } from './endpointsOutput';
 
 export interface AuthResult {
-  login: (email: string, password: string)=> Promise<AxiosResponse<LoginOutput, any>>;
+  login: (email: string, password: string) => Promise<AxiosResponse<LoginOutput, any>>;
   signup: (nome: string, email: string, password: string, identificador: string, address: string, cep: string, state: string, city: string, phone: string) => Promise<AxiosResponse<SignupOutput, any>>;
+  signupLocatario: (nome: string, email: string, password: string, identificador: string, address: string, cep: string, state: string, city: string, phone: string) => Promise<AxiosResponse<SignupOutput, any>>;
 }
 
 export function useApi(): AuthResult {
@@ -36,5 +37,19 @@ export function useApi(): AuthResult {
     });
   }
 
-  return { login, signup };
+  async function signupLocatario(nome: string, email: string, password: string, identificador: string, address: string, cep: string, state: string, city: string, phone: string): Promise<AxiosResponse<SignupOutput, any>> {
+    return client.post<SignupOutput>('/locatario/signup', {
+      nome,
+      email,
+      password,
+      identificador,
+      address,
+      cep,
+      state,
+      city,
+      phone,
+    });
+  }
+
+  return { login, signup, signupLocatario };
 }
