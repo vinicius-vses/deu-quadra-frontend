@@ -27,7 +27,7 @@ function formatPrice(price: number) {
 }
 
 // URL da imagem fixa
-const defaultImageUrl = 'src/assets/quadra.jpg';
+const defaultImageUrl = '@src/assets/quadra.jpg';
 
 export function Card({ props }: CardProps) {
   const languageContext = useContext(LanguageContext)!;
