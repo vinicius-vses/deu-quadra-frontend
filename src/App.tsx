@@ -51,7 +51,7 @@ export function App() {
                 <Route path="/infosQuadra/:id" element={<InfosQuadraPage />} />
                 <Route path="/company" element={<CadastroEmpresaPage />} />
                 <Route path="/allocate/:id" element={<GuardedRoute><AllocatePage /></GuardedRoute>}/>
-                <Route path="/empresa/:id"  element={<GuardedRoute><LocadorPage /></GuardedRoute>}/>
+                <Route path="/empresa"  element={<GuardedRoute><LocadorPage /></GuardedRoute>}/>
               </Routes>
             </Router>
           </AuthenticationContext.Provider>

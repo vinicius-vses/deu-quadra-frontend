@@ -21,7 +21,7 @@ export function LocadorPage() {
 
   useEffect(() => {
     // Faz a requisição para o endpoint
-    axios.get('http://localhost:8080/companies/' + idEmpresa)
+    axios.get('http://3.87.195.183:8080/companies/' + idEmpresa)
         .then((response) => {
         // Atualiza o estado com os dados recebidos
         //setCourtsData(response.data.courtsModelList);
@@ -65,7 +65,7 @@ export function LocadorPage() {
           </div>
           <div className="flex items-center">
           <Link
-            to={'/empresa/1'}
+            to={'/empresa/'}
             className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
           >
             Minhas Quadras
