@@ -24,7 +24,7 @@ import { ResetPasswordPage } from './pages/SimplePage/Login/ResetPasswordPage';
 import { PresignupPage } from './pages/SimplePage/Login/PresignupPage';
 import { Signuplocadorpage } from './pages/SimplePage/Login/Signuplocadorpage';
 import {CadastroEmpresaPage} from './pages/SimplePage/Cadastro/CadastroEmpresaPage';
-
+import {EditcadastroPage} from './pages/SimplePage/Cadastro/EditcadastroPage';
 
 
 
@@ -52,6 +52,7 @@ export function App() {
                 <Route path="/company" element={<CadastroEmpresaPage />} />
                 <Route path="/allocate/:id" element={<GuardedRoute><AllocatePage /></GuardedRoute>}/>
                 <Route path="/empresa"  element={<GuardedRoute><LocadorPage /></GuardedRoute>}/>
+                <Route path="/editcadastro"  element={<GuardedRoute><EditcadastroPage /></GuardedRoute>}/>
               </Routes>
             </Router>
           </AuthenticationContext.Provider>
