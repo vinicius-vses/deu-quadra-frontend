@@ -47,7 +47,7 @@ export function Card({ props }: CardProps) {
               <span className="text-sm text-green-800">{props.nome}</span>
             </Link>
           </div>
-          <div className="mt-3"></div>
+          <div className="mt-2"></div>
         </div>
         <div className="flex justify-between items-center">
           <div className="flex-center flex-row  gap-1">
