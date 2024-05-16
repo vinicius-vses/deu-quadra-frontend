@@ -53,7 +53,7 @@ export function Card({ props }: CardProps) {
         <div className="flex justify-between items-center">
           <div className="flex-center flex-row  gap-1">
             <span className="text-sm font-light">R$</span>
-            <span className="bold text-xl">{formatPrice(Number(props.preco))}</span>
+            <span className="bold text-xl">{formatPrice(Number(props.courtsModelList.preco))}</span>
           </div>
           <Link
             to={'/allocate/' + props.idQuadra}
