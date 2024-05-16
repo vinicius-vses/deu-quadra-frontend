@@ -29,19 +29,16 @@ function formatPrice(price: number) {
 export function Card({ props }: CardProps) {
   const languageContext = useContext(LanguageContext)!;
 
-  const precoNumber = Number(props.preco);
-  const formattedPrice = isNaN(precoNumber) ? 'Preço inválido' : formatPrice(precoNumber);
-
   return (
-    <div className="rounded-sm flex flex-row border bg-white overflow-hidden hover:shadow-xl transition-all duration-300">
+    <div className=" rounded-sm flex flex-row border bg-white overflow-hidden hover:shadow-xl transition-all duration-300 ">
       <div className="h-[200px] aspect-square">
-        <img src={props.imagemUrl} className="object-cover w-full h-full" alt={props.nome} />
+        <img src={props.imagemUrl} className="object-cover w-full h-full" />
       </div>
       <div className="flex p-5 flex-col justify-between items-between w-[600px]">
         <div>
           <div className="flex flex-col">
             <span className="text-xs text-discreet font-bold">
-              {props.Empresa.bairro}, {props.Empresa.rua}, {props.Empresa.numero}
+              {props.bairro}, {props.rua}, {props.numero}{' '}
             </span>
             <span className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">
               {props.nome}
@@ -50,31 +47,21 @@ export function Card({ props }: CardProps) {
               <span className="text-sm text-green-800">{props.nome}</span>
             </Link>
           </div>
-          
-          <div className="mt-4">
-            <Link
-              to={'/allocate/' + props.idQuadra}
-              className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
-            >
-              {languageContext.language.cardButtonAction}
-            </Link>
-          </div>
+            
+          <Link
+            to={'/allocate/' + props.idQuadra}
+            className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
+          >
+            {languageContext.language.cardButtonAction}
+          </Link>
 
-          <div className="mt-2">
-            <Link
-              to={'/empresa/' + props.idEmpresa}
-              className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
-            >
-              VER TODAS AS QUADRAS
-            </Link>
-          </div>
+          <Link
+            to={'/empresa/' + props.idEmpresa}
+            className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
+          >
+            VER TODAS AS QUADRAS
+          </Link>
 
-        </div>
-        <div className="flex justify-between items-center">
-          <div className="flex-center flex-row gap-1">
-            <span className="text-sm font-light">R$</span>
-            <span className="bold text-xl">{formattedPrice}</span>
-          </div>
         </div>
       </div>
     </div>
