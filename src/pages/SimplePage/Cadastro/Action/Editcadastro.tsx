@@ -19,15 +19,15 @@ export function Editcadastro() {
   const [cidade, setCidade] = useState('');
   const [telefone, setTelefone] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorCEP, setErrorCEP] = useState('');
 
   const auth = useContext(AuthenticationContext);
   const navigate = useNavigate();
   const { language } = useContext(LanguageContext);
 
   const { signup } = useApi();
-  
+
   useEffect(() => {
-    // Fetch user data from the API and set the state
     async function fetchUserData() {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/locador/profile`, {
@@ -51,6 +51,26 @@ export function Editcadastro() {
 
     fetchUserData();
   }, [auth.tokens]);
+
+  const validateCEP = async (cep: string) => {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      const { erro, logradouro, bairro, localidade, uf } = response.data;
+
+      if (erro) {
+        setErrorCEP('CEP inválido');
+      } else {
+        setRua(logradouro);
+        setBairro(bairro);
+        setCidade(localidade);
+        setEstado(uf);
+        setErrorCEP('');
+      }
+    } catch (error) {
+      console.error('Error validating CEP:', error);
+      setErrorCEP('Erro ao validar CEP');
+    }
+  };
 
   const handleUpdateProfile = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -113,111 +133,115 @@ export function Editcadastro() {
                 />
               </div>
               <div className="w-full px-2 sm:w-1/2">
-                <TextInput
-                  label={language.passwordLabel}
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder={language.passwordButtonPlaceholder}
-                />
-              </div>
-              <div className="w-full px-2 sm:w-1/2">
-                <TextInput
-                  label="Número"
-                  type="text"
-                  id="numero"
-                  value={numero}
-                  onChange={(e) => setNumero(e.target.value)}
-                />
-              </div>
-              <div className="w-full px-2 sm:w-1/2">
-                <TextInput
-                  label="Rua"
-                  type="text"
-                  id="rua"
-                  value={rua}
-                  onChange={(e) => setRua(e.target.value)}
-                />
-              </div>
-              <div className="w-full px-2 sm:w-1/2">
-                <TextInput
-                  label="Bairro"
-                  type="text"
-                  id="bairro"
-                  value={bairro}
-                  onChange={(e) => setBairro(e.target.value)}
-                />
-              </div>
-              <div className="w-full px-2 sm:w-1/2">
-                <TextInput
-                  label="CEP"
-                  type="text"
-                  id="cep"
-                  value={cep}
-                  onChange={(e) => setCep(e.target.value)}
-                />
-              </div>
-              <div className="w-full px-2 sm:w-1/2">
-                <TextInput
-                  label="Estado"
-                  type="text"
-                  id="estado"
-                  value={estado}
-                  onChange={(e) => setEstado(e.target.value)}
-                />
-              </div>
-              <div className="w-full px-2 sm:w-1/2">
-                <TextInput
-                  label="Cidade"
-                  type="text"
-                  id="cidade"
-                  value={cidade}
-                  onChange={(e) => setCidade(e.target.value)}
-                />
-              </div>
-              <div className="w-full px-2 sm:w-1/2">
-                <TextInput
-                  label="Telefone"
-                  type="text"
-                  id="telefone"
-                  value={telefone}
-                  onChange={(e) => setTelefone(e.target.value)}
-                />
-              </div>
-              <div className="w-full px-2 mt-3">
-                <div className="flex justify-between">
-                  <button
-                    type="button"
-                    className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
-                    onClick={() => navigate('/empresa')}
-                  >
-                    Voltar
-                  </button>
-                  <button
-                    type="submit"
-                    className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
-                  >
-                    {language.LoginPageButton}
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-      {successMessage && (
-        <div className="flex justify-center items-center h-screen">
-          <div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full sm:w-4/4 md:w-3/2 lg:w-3/3 xl:w-5/4 text-center">
-            <p className="text-green-800 text-xl mb-4" style={{ whiteSpace: "nowrap" }}>{successMessage}</p>
-            <button className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600" onClick={handleOkClick}>
-              OK
-            </button>
-          </div>
-        </div>
-      )}
-    </>
-  );
+<TextInput
+label={language.passwordLabel}
+type="password"
+id="password"
+value={password}
+onChange={(e) => setPassword(e.target.value)}
+placeholder={language.passwordButtonPlaceholder}
+/>
+</div>
+<div className="w-full px-2 sm:w-1/2">
+<TextInput
+label="CEP"
+type="text"
+id="cep"
+value={cep}
+onChange={async (e) => {
+setCep(e.target.value);
+await validateCEP(e.target.value);
+}}
+/>
+{errorCEP && <p className="text-red-500">{errorCEP}</p>}
+</div>
+<div className="w-full px-2 sm:w-1/2">
+<TextInput
+label="Rua"
+type="text"
+id="rua"
+value={rua}
+onChange={(e) => setRua(e.target.value)}
+/>
+</div>
+<div className="w-full px-2 sm:w-1/2">
+<TextInput
+label="Número"
+type="text"
+id="numero"
+value={numero}
+onChange={(e) => setNumero(e.target.value)}
+/>
+</div>
+<div className="w-full px-2 sm:w-1/2">
+<TextInput
+label="Bairro"
+type="text"
+id="bairro"
+value={bairro}
+onChange={(e) => setBairro(e.target.value)}
+/>
+</div>
+<div className="w-full px-2 sm:w-1/2">
+<TextInput
+label="Estado"
+type="text"
+id="estado"
+value={estado}
+onChange={(e) => setEstado(e.target.value)}
+/>
+</div>
+<div className="w-full px-2 sm:w-1/2">
+<TextInput
+label="Cidade"
+type="text"
+id="cidade"
+value={cidade}
+onChange={(e) => setCidade(e.target.value)}
+/>
+</div>
+<div className="w-full px-2 sm:w-1/2">
+<TextInput
+label="Telefone"
+type="text"
+id="telefone"
+value={telefone}
+onChange={(e) => setTelefone(e.target.value)}
+/>
+</div>
+<div className="w-full px-2 mt-3">
+<div className="flex justify-between">
+<button
+type="button"
+className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
+onClick={() => navigate('/empresa')}
+>
+Voltar
+</button>
+<button
+               type="submit"
+               className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
+             >
+{language.LoginPageButton}
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+)}
+{successMessage && (
+<div className="flex justify-center items-center h-screen">
+<div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full sm:w-4/4 md:w-3/2 lg:w-3/3 xl:w-5/4 text-center">
+<p className="text-green-800 text-xl mb-4" style={{ whiteSpace: "nowrap" }}>{successMessage}</p>
+<button className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600" onClick={handleOkClick}>
+OK
+</button>
+</div>
+</div>
+)}
+</>
+);
 }
 
 export default Editcadastro;
