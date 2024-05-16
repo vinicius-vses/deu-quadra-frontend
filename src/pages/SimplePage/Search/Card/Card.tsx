@@ -8,7 +8,7 @@ export interface CardProps {
     preco: string;
     descricao: string;
     idQuadra: number;
-    imagemUrl: string;
+    imagemUrl?: string; // Faz a URL da imagem ser opcional
     idEmpresa: number;
     Empresa: {
       nome: string;
@@ -26,13 +26,19 @@ function formatPrice(price: number) {
   });
 }
 
+// URL da imagem fixa
+const defaultImageUrl = 'src/assets/quadra.jpg';
+
 export function Card({ props }: CardProps) {
   const languageContext = useContext(LanguageContext)!;
+
+  // Verifica se a imagemUrl está definida, se não, usa a imagem fixa padrão
+  const imageUrl = props.imagemUrl || defaultImageUrl;
 
   return (
     <div className=" rounded-sm flex flex-row border bg-white overflow-hidden hover:shadow-xl transition-all duration-300 ">
       <div className="h-[200px] aspect-square">
-        <img src={props.imagemUrl} className="object-cover w-full h-full" />
+        <img src={imageUrl} className="object-cover w-full h-full" alt="Imagem" />
       </div>
       <div className="flex p-5 flex-col justify-between items-between w-[600px]">
         <div>
