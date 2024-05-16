@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { SimplePage } from '../SimplePage';
-import { Signuplocador } from './Action/Signuplocadorcp';
+import { Signuplocador } from './Action/Signuplocador';
 import { Signuplocatario } from './Actions/Signuplocatario'; // Corrigido a sintaxe da importação
-import {Editcadastro} from './Action/Editcadastro';
-
+import { Editcadastro } from './Action/Editcadastro'; // Corrigido o nome do arquivo e o caminho
 
 enum Actions {
   LOGIN,
@@ -16,7 +15,7 @@ export function EditcadastroPage() {
   return (
     <SimplePage>
       <div className="flex-center bg-green-300">
-        <Editcadastro></Editcadastro>
+        <Editcadastro />
       </div>
     </SimplePage>
   );
