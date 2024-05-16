@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../../../contexts/Auth';
 import { LanguageContext } from '../../../../contexts/Language';
 import axios from 'axios';
-import cepPromise from 'cep-promise';
 
 export function Editcadastro() {
   const [nome, setNome] = useState('');
@@ -20,7 +19,6 @@ export function Editcadastro() {
   const [cidade, setCidade] = useState('');
   const [telefone, setTelefone] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [cepError, setCepError] = useState('');
 
   const auth = useContext(AuthenticationContext);
   const navigate = useNavigate();
@@ -69,29 +67,6 @@ export function Editcadastro() {
         'ERRO AO ATUALIZAR PERFIL, TENTE NOVAMENTE EM INSTANTES! ERRO:' +
           error
       );
-    }
-  };
-
-  const validateCep = async (cep: string) => {
-    try {
-      const address = await cepPromise(cep);
-      setRua(address.street);
-      setBairro(address.neighborhood);
-      setCidade(address.city);
-      setEstado(address.state);
-      setCepError('');
-    } catch (error) {
-      setCepError('CEP inválido');
-    }
-  };
-
-  const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newCep = e.target.value;
-    setCep(newCep);
-    if (newCep.length === 8) {
-      validateCep(newCep);
-    } else {
-      setCepError('CEP deve ter 8 dígitos');
     }
   };
 
@@ -180,9 +155,8 @@ export function Editcadastro() {
                   type="text"
                   id="cep"
                   value={cep}
-                  onChange={handleCepChange}
+                  onChange={(e) => setCep(e.target.value)}
                 />
-                {cepError && <p className="text-red-600">{cepError}</p>}
               </div>
               <div className="w-full px-2 sm:w-1/2">
                 <TextInput
