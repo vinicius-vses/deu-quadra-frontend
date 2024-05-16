@@ -80,7 +80,7 @@ export function CadastroEmpresa() {
     if (/^\d{8}$/.test(value)) {
       fetchAddressFromCEP(value);
     } else {
-      setError('Formato de CEP inválido');
+      setError('CEP : Apenas Números');
     }
   };
 
