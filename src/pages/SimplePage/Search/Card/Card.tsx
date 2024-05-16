@@ -47,15 +47,7 @@ export function Card({ props }: CardProps) {
               <span className="text-sm text-green-800">{props.nome}</span>
             </Link>
           </div>
-
-          <div className="mt-3"></div>
-        </div>
-        <div className="flex justify-between items-center">
-          <div className="flex-center flex-row  gap-1">
-            <span className="text-sm font-light">R$</span>
-            <span className="bold text-xl">{formatPrice(Number(props.preco))}</span>
-          </div>
-          <Link
+        <Link
             to={'/allocate/' + props.idQuadra}
             className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
           >
