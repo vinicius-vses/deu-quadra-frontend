@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { SimplePage } from '../SimplePage';
 import { Signuplocador } from './Action/Signuplocadorcp';
 import { Signuplocatario } from './Actions/Signuplocatario'; // Corrigido a sintaxe da importação
-import Editcadastro from './Action/editcadastro';
+import {Editcadastro} from './Action/editcadastro';
+
 
 enum Actions {
   LOGIN,
