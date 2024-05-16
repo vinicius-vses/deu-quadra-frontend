@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LanguageContext } from '../../../../contexts/Language';
-import quadraImage from 'src/assets/quadra.jpg'; // Importa a imagem diretamente
 
 export interface CardProps {
   props: {
@@ -9,6 +8,7 @@ export interface CardProps {
     preco: string;
     descricao: string;
     idQuadra: number;
+    imagemUrl: string;
     idEmpresa: number;
     Empresa: {
       nome: string;
@@ -32,7 +32,7 @@ export function Card({ props }: CardProps) {
   return (
     <div className=" rounded-sm flex flex-row border bg-white overflow-hidden hover:shadow-xl transition-all duration-300 ">
       <div className="h-[200px] aspect-square">
-        <img src={quadraImage} className="object-cover w-full h-full" alt="Imagem" />
+        <img src={props.imagemUrl} className="object-cover w-full h-full" />
       </div>
       <div className="flex p-5 flex-col justify-between items-between w-[600px]">
         <div>
@@ -52,7 +52,7 @@ export function Card({ props }: CardProps) {
         <div className="flex justify-between items-center">
           <div className="flex-center flex-row  gap-1">
             <span className="text-sm font-light"></span>
-          </div>
+             </div>
           <Link
             to={'/allocate/' + props.idQuadra}
             className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
