@@ -40,7 +40,7 @@ export function Login() {
           },
         });
 
-        navigate('/empresa/1');
+        navigate('/empresa');
       })
       .catch((error: any) => {
         openModal('Erro', error.response.data.message);
