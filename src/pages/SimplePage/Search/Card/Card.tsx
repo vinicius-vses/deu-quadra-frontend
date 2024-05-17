@@ -32,27 +32,27 @@ export function Card({ props }: CardProps) {
   return (
     <div className=" rounded-sm flex flex-row border bg-white overflow-hidden hover:shadow-xl transition-all duration-300 ">
       <div className="h-[200px] aspect-square">
-        <img src={props.imagemUrl} className="object-cover w-full h-full" alt={props.nome} />
+        <img src={props.imagemUrl} className="object-cover w-full h-full" />
       </div>
       <div className="flex p-5 flex-col justify-between items-between w-[600px]">
         <div>
           <div className="flex flex-col">
             <span className="text-xs text-discreet font-bold">
-              {props.Empresa.bairro}, {props.Empresa.rua}, {props.Empresa.numero}{' '}
+              {props.bairro}, {props.rua}, {props.numero}{' '}
             </span>
             <span className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">
               {props.nome}
             </span>
-            <Link to={'/infosquadras/' + props.Empresa.idEmpresa}>
-              <span className="text-sm text-green-800">{props.Empresa.nome}</span>
+            <Link to={'/empresa/' + props.idEmpresa}>
+              <span className="text-sm text-green-800">{props.nome}</span>
             </Link>
           </div>
           <div className="mt-2"></div>
         </div>
         <div className="flex justify-between items-center">
           <div className="flex-center flex-row  gap-1">
-            <span className="text-sm font-light">{formatPrice(parseFloat(props.preco))}</span>
-          </div>
+            <span className="text-sm font-light"></span>
+             </div>
           <Link
             to={'/allocate/' + props.idQuadra}
             className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
@@ -61,7 +61,7 @@ export function Card({ props }: CardProps) {
           </Link>
 
           <Link
-            to={'/infosquadras/' + props.Empresa.idEmpresa}
+            to={'/empresa/' + props.idEmpresa}
             className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
           >
             VER TODAS AS QUADRAS
