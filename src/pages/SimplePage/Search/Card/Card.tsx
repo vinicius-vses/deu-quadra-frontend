@@ -43,7 +43,7 @@ export function Card({ props }: CardProps) {
             <span className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">
               {props.nome}
             </span>
-            <Link to={'/empresa/' + props.idEmpresa}>
+            <Link to={'/infosQuadra/' + props.idEmpresa}>
               <span className="text-sm text-green-800">{props.nome}</span>
             </Link>
           </div>

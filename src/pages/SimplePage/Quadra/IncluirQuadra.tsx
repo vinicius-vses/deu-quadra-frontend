@@ -30,7 +30,7 @@ export function IncluirQuadraPage() {
 
       console.log(response.data);
       window.alert('QUADRA CADASTRADA COM SUCESSO!');
-      navigate('/empresa/' + 1);
+      navigate('/empresa');
 
       if (response.status === 200) {
         console.log('Court created successfully!');
