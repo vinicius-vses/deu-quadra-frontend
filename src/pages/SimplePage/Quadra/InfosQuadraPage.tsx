@@ -3,47 +3,46 @@ import { SimplePage } from '../SimplePage';
 import Navbar from '../../../components/Navbar/Navbar';
 import { CardQuadra } from '../Locador/Card/CardQuadra';
 import { CardEmpresa } from '../Locador/Card/CardEmpresa';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 export function InfosQuadraPage() {
   const [courtsData, setCourtsData] = useState([]);
-  const [empresaData, setEmpresaData] = useState({});
+  const [empresaData, setEmpresa] = useState([]);
 
-  const { idQuadra } = useParams(); // Pegando o ID da quadra dos parâmetros da URL
+  const { idEmpresa } = useParams(); // Pegando o ID da empresa da URL
 
   useEffect(() => {
-    // Faz a requisição para o endpoint da empresa
-    axios.get(`http://3.87.195.183:8080/companies/1`)
+    axios.get(`http://3.87.195.183:8080/companies/${idEmpresa}`)
       .then((response) => {
-        setEmpresaData(response.data);
+        setEmpresa(response.data);
       })
       .catch((error) => {
         console.error('Erro ao buscar dados da empresa:', error);
       });
-  }, []);
+  }, [idEmpresa]);
 
   useEffect(() => {
-    // Faz a requisição para o endpoint da quadra usando o ID dinâmico
-    axios.get(`http://3.87.195.183:8080/courts/${idQuadra}`)
+    axios.get(`http://3.87.195.183:8080/courts?empresa=${idEmpresa}`)
       .then((response) => {
         setCourtsData(response.data);
       })
       .catch((error) => {
-        console.error('Erro ao buscar dados da quadra:', error);
+        console.error('Erro ao buscar dados das quadras:', error);
       });
-  }, [idQuadra]); // Adicionando idQuadra como dependência para refazer a busca quando ele mudar
+  }, [idEmpresa]);
 
   return (
     <SimplePage>
       <div>
         <Navbar className="fade-in" />
-        <div className="rounded-sm flex flex-row border bg-white overflow-hidden hover:shadow-xl transition-all duration-300 ">
-          {/* Aqui você pode renderizar os componentes de empresa, se necessário */}
+        <div className="rounded-sm flex flex-row border bg-white overflow-hidden hover:shadow-xl transition-all duration-300">
+          {/* Renderizar aqui os cards de quadra */}
+          {courtsData.map((court) => (
+            <CardQuadra key={court.id} props={court} />
+          ))}
         </div>
         <CardEmpresa props={empresaData} />
-        <h2>Informações da Quadra selecionada:</h2>
-        <CardQuadra props={courtsData} />
       </div>
     </SimplePage>
   );
