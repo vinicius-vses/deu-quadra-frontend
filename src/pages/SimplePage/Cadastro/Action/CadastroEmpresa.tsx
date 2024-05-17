@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthenticationContext } from '../../../../contexts/Auth';
 import { LanguageContext } from '../../../../contexts/Language';
+import { useAuth } from '../../../../hooks/Auth';
+
 
 export function CadastroEmpresa() {
   const [nome, setNome] = useState('');
@@ -28,10 +30,14 @@ export function CadastroEmpresa() {
   const { language } = useContext(LanguageContext)!;
   const navigate = useNavigate();
 
+  const authentication = useAuth();
+  const idUsuario = authentication.user?.id;
+
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
+      //const response = await axios.post('http://localhost:8080/companies', {
       const response = await axios.post('http://3.87.195.183:8080/companies', {
         nome: nome,
         telefone: telefone,
@@ -42,7 +48,8 @@ export function CadastroEmpresa() {
         estado: estado,
         cidade: cidade,
         lat: latitude,
-        lon: longitude
+        lon: longitude,
+        idUsuario: idUsuario
       });
 
       console.log(response.data);
