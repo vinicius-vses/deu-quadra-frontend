@@ -65,7 +65,7 @@ export function LocadorPage() {
           </div>
           <div className="flex items-center">
           <Link
-            to={'/infosQuadra/' + props.idEmpresa}
+            to={'/empresa/'}
             className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
           >
             Minhas Quadras
