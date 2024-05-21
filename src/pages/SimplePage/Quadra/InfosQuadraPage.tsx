@@ -13,7 +13,7 @@ export function InfosQuadraPage() {
   const { idEmpresa } = useParams(); // Pegando o ID da empresa da URL
 
   useEffect(() => {
-    axios.get(`https://3.234.183.45:443/companies/${idEmpresa}`)
+    axios.get(`http://3.234.183.45:8080/companies/${idEmpresa}`)
       .then((response) => {
         setEmpresa(response.data);
       })
@@ -23,7 +23,7 @@ export function InfosQuadraPage() {
   }, [idEmpresa]);
 
   useEffect(() => {
-    axios.get(`https://3.234.183.45:443/courts?empresa=${idEmpresa}`)
+    axios.get(`http://3.234.183.45:8080/courts?empresa=${idEmpresa}`)
       .then((response) => {
         setCourtsData(response.data);
       })
