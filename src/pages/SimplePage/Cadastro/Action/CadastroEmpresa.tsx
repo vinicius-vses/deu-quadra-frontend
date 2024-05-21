@@ -38,7 +38,7 @@ export function CadastroEmpresa() {
 
     try {
       //const response = await axios.post('http://localhost:8080/companies', {
-      const response = await axios.post('https://3.234.183.45:8080/companies', {
+      const response = await axios.post('http://3.234.183.45:8080/companies', {
         nome: nome,
         telefone: telefone,
         cep: cep,
