@@ -20,7 +20,7 @@ export function LocadorPage() {
 
   useEffect(() => {
     // Faz a requisição para o endpoint
-    axios.get('http://localhost:8080/companies/' + idEmpresa)
+    axios.get('http://3.234.183.45:8080/companies/' + idEmpresa)
         .then((response) => {
         // Atualiza o estado com os dados recebidos
         //setCourtsData(response.data.courtsModelList);
