@@ -35,7 +35,7 @@ export function Signuplocadorcp() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://3.234.183.45:8080/locador/register', {
+      const response = await axios.post('https://3.234.183.45:443/locador/register', {
         nome: nome,
         email: email,
         password: password,
