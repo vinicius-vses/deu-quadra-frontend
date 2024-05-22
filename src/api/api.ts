@@ -5,7 +5,7 @@ import { GetCourtsOutput, LoginOutput, GetEmpresasOutput } from './endpointsOutp
 export interface AuthResult {
   login: (email: string, password: string)=> Promise<AxiosResponse<LoginOutput, any>>;
   getCourts: (lat:number,lon: number, distanceInKillometers: number)=> Promise<AxiosResponse<GetCourtsOutput[], any>>;
-  getEmpresas: (nome:string, idEmpresa: number, rua: string, bairro: string,numero: string)=> Promise<AxiosResponse<GetEmpresasOutput[], any>>;
+  getEmpresas: (lat:number,lon: number, km: number)=> Promise<AxiosResponse<GetEmpresasOutput[], any>>;
 }
 
 export function useApi(): AuthResult {
@@ -23,9 +23,9 @@ export function useApi(): AuthResult {
     });
   }
 
-  async function getEmpresas(nome: string, idEmpresa: number, rua: string, bairro: string,numero: string): Promise<AxiosResponse<GetEmpresasOutput[], any>> {
-    return client.get<GetEmpresasOutput>('/companies/', {
-      nome, idEmpresa, rua, bairro,numero,
+  async function getEmpresas(lat:number,lon: number, km: number): Promise<AxiosResponse<GetEmpresasOutput[], any>> {
+    return client.post<GetEmpresasOutput[]>('/companies/search',{
+        lat,lon,km
     });
   }
 
