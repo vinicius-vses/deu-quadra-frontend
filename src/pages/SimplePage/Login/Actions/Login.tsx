@@ -13,6 +13,9 @@ export function Login() {
 
   const auth = useContext(AuthenticationContext);
   const navigate = useNavigate();
+  const { openModal } = useModal();
+  const { language } = useContext(LanguageContext)!;
+  const { loginLocador, loginLocatario } = useApi();
 
   useEffect(() => {
     if (auth?.isAuthenticated) {
@@ -20,38 +23,52 @@ export function Login() {
     }
   }, [auth, navigate]);
 
-  const { loginLocador, loginLocatario } = useApi();
-  const { openModal } = useModal();
-  const { language } = useContext(LanguageContext)!;
-
-  function handleLogin(event: FormEvent) {
+  const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
 
-    const loginFunction = userType === 'locador' ? loginLocador : loginLocatario;
+    try {
+      let response;
+      let authToken;
 
-    loginFunction(email, password)
-      .then((response) => {
-        if (response.data) {
-          auth!.setTokens({
-            authToken: {
-              token: response.data,
-              expiresIn: new Date(),
-            },
-            refreshToken: {
-              expiresIn: new Date(),
-              token: 'a',
-            },
-          });
-
-          navigate('/empresa');
-        } else {
-          openModal('Erro', 'Erro desconhecido ao fazer login');
+      if (userType === 'locador') {
+        response = await loginLocador(email, password);
+        console.log('Locador Response:', response);
+        if (response.status === 200 && response.data) {
+          authToken = response.data; // Para locador, o JWT é retornado diretamente
         }
-      })
-      .catch((error: any) => {
-        openModal('Erro', error.response ? error.response.data.message : 'Erro desconhecido ao fazer login');
-      });
-  }
+      } else if (userType === 'locatario') {
+        response = await loginLocatario(email, password);
+        console.log('Locatario Response:', response);
+        if (response.status === 200 && response.data) {
+          authToken = response.data.authToken; // Para locatario, o JWT está dentro de `response.data.authToken`
+        }
+      }
+
+      if (authToken) {
+        auth!.setTokens({
+          authToken: {
+            token: authToken,
+            expiresIn: new Date(Date.now() + 3600 * 1000), // Ajuste o tempo de expiração conforme necessário
+          },
+          refreshToken: {
+            expiresIn: new Date(Date.now() + 3600 * 1000), // Ajuste o tempo de expiração conforme necessário
+            token: 'a',
+          },
+        });
+
+        if (userType === 'locador') {
+          navigate('/locadorPage');
+        } else if (userType === 'locatario') {
+          navigate('/locatarioPage');
+        }
+      } else {
+        openModal('Erro', 'Erro desconhecido ao fazer login');
+      }
+    } catch (error) {
+      console.error('Login Error:', error); // Adicionado para capturar e imprimir o erro
+      openModal('Erro', error.response ? error.response.data.message : 'Erro desconhecido ao fazer login');
+    }
+  };
 
   return (
     <div className="p-6 bg-white shadow-md rounded-lg mb-3">

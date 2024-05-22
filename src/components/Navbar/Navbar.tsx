@@ -62,7 +62,8 @@ function BottomMenu() {
         <div className="flex items-center">
           <div className="flex"> {/* Adicionando display flex para agrupar os links */}
             <Link to="/" className="text-white mr-4">Home</Link>
-            <Link to="/empresa" className="text-white mr-4">Minha Área</Link>
+            <Link to="/locadorPage" className="text-white mr-4">Area do Locador</Link>
+            <Link to="/locatarioPage" className="text-white mr-4">Area do Locatario</Link>
             <Link to="/search" className="text-white mr-4">Search</Link>
           </div>
         </div>

@@ -37,6 +37,7 @@
     "react-leaflet": "^4.2.1",
     "react-phone-number-input": "^3.2.19",
     "react-router-dom": "^6.8.1",
+    "rss-parser": "^3.13.0",
     "sort-by": "^0.0.2"
   },
   "devDependencies": {

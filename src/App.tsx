@@ -1,7 +1,5 @@
 import React, { Suspense, createContext, useState } from 'react';
-
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-
 import { HomePage, SearchPage } from './pages/SimplePage/Search/SearchPage';
 import { SimplePage } from './pages/SimplePage/SimplePage';
 import { WorkPage } from './pages/SimplePage/Work/WorkPage';
@@ -9,7 +7,6 @@ import { AuthResult, useAuth } from './hooks/Auth';
 import { GuardedRoute } from './routes/GuardedRoutes';
 import { AuthenticationContext } from './contexts/Auth';
 import { LoginPage } from './pages/SimplePage/Login/LoginPage';
-
 import { Modal } from '@components/Modal/Modal';
 import { ModalProvider } from '@components/Modal/ModalProvider';
 import { LandingPage } from './pages/SimplePage/Landing/LandingPage';
@@ -23,12 +20,11 @@ import { Signuplocatariopage } from './pages/SimplePage/Login/Signuplocatariopag
 import { ResetPasswordPage } from './pages/SimplePage/Login/ResetPasswordPage';
 import { PresignupPage } from './pages/SimplePage/Login/PresignupPage';
 import { Signuplocadorpage } from './pages/SimplePage/Login/Signuplocadorpage';
-import {CadastroEmpresaPage} from './pages/SimplePage/Cadastro/CadastroEmpresaPage';
-import {EditcadastroPage} from './pages/SimplePage/Cadastro/EditcadastroPage';
+import { CadastroEmpresaPage } from './pages/SimplePage/Cadastro/CadastroEmpresaPage';
+import { EditcadastroPage } from './pages/SimplePage/Cadastro/EditcadastroPage';
 import { MinhasreservasPage } from "./pages/SimplePage/Reservas/MinhasreservasPage";
-
-
-
+import { LocatarioPage } from "./pages/SimplePage/Locatario/LocatarioPage";
+import { EditcadastrolocatarioPage } from './pages/SimplePage/Cadastro/EditcadastrolocatarioPage';
 
 
 export function App() {
@@ -56,6 +52,10 @@ export function App() {
                 <Route path="/empresa"  element={<GuardedRoute><LocadorPage /></GuardedRoute>}/>
                 <Route path="/editcadastro"  element={<GuardedRoute><EditcadastroPage /></GuardedRoute>}/>
                 <Route path="/minhasreservas"  element={<MinhasreservasPage />}/>
+                <Route path="/locatarioPage"  element={<LocatarioPage />}/>
+                <Route path="/locadorPage"  element={<LocadorPage />}/>
+                <Route path="/editcadastrolocatario" element={<EditcadastrolocatarioPage />} />
+
               </Routes>
             </Router>
           </AuthenticationContext.Provider>
