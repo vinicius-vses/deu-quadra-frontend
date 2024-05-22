@@ -10,7 +10,7 @@ import { Map } from './Map/Map';
 import { LanguageContext } from '../../../contexts/Language';
 
 export function SearchPage() {
-  const { getEmpresasLatLong } = useApi();
+  const { getEmpresas } = useApi();
   const [courts, setCourts] = useState([]);
   const [distance, setDistance] = useState(10); // Estado para controlar a distância selecionada
   const [isLoading, setLoading] = useState(true);
@@ -29,8 +29,8 @@ export function SearchPage() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-
-          getEmpresasLatLong(latitude, longitude, distance).then(({ data }) => {
+           console.log(latitude); 
+           getEmpresas(latitude, longitude, distance).then(({ data }) => {
             setPosition({ lat: latitude, lon: longitude });
             setCourts(data);
             setLoading(false);
@@ -53,7 +53,7 @@ export function SearchPage() {
     setDistance(newDistance); // Atualizar o estado da distância
   };
 
-  const distanceOptions = [1, 3, 5, 8, 10];
+  const distanceOptions = [1, 3, 5, 8, 10, 20];
 
   return (
     <SimplePage>
