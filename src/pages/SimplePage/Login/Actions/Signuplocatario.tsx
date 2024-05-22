@@ -1,7 +1,7 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import TextInput from '@components/TextInput';
 import { useModal } from '@src/hooks/Modal';
-import { useApi } from '@src/hooks/hooks'; // Importando o hook recém-criado
+import { useApi } from '@src/hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../../../contexts/Auth';
 import { LanguageContext } from '../../../../contexts/Language';
@@ -29,7 +29,7 @@ export function Signuplocatario() {
     }
   }, []);
 
-  const { signup } = useApi();
+  const { signupLocatario } = useApi();
   const { openModal } = useModal();
   const { language } = useContext(LanguageContext)!;
 
@@ -56,7 +56,6 @@ export function Signuplocatario() {
     const { value } = event.target;
     setCep(value);
 
-    // Verifica se o CEP tem 8 dígitos para evitar requisições desnecessárias
     if (value.length === 8) {
       fetchAddressFromCEP(value);
     }
@@ -65,7 +64,7 @@ export function Signuplocatario() {
   function handleSignup(event: FormEvent) {
     event.preventDefault();
 
-    signup(nome, email, password, identificador, numero, rua, bairro, cep, estado, cidade, telefone)
+    signupLocatario(nome, email, password, identificador, `${rua}, ${numero}`, cep, estado, cidade, telefone)
       .then(() => {
         setSuccessMessage('Cadastro finalizado com sucesso!');
       })
@@ -82,11 +81,10 @@ export function Signuplocatario() {
   return (
     <>
       {!successMessage && (
-       
-          <div className="flex justify-center items-center h-screen">
-      <div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Cadastre-se</h2>
-        <h2 className="text-1xl font-semibold mb-4 text-center">Para anunciar uma quadra</h2>
+        <div className="flex justify-center items-center h-screen">
+          <div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
+            <h2 className="text-2xl font-semibold mb-4 text-center">Cadastre-se</h2>
+            <h2 className="text-1xl font-semibold mb-4 text-center">Para alugar uma quadra</h2>
             <form onSubmit={handleSignup} className="flex flex-wrap">
               <div className="w-full px-2 sm:w-1/1">
                 <TextInput
@@ -234,3 +232,4 @@ export function Signuplocatario() {
 }
 
 export default Signuplocatario;
+

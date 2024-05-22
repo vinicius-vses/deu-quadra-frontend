@@ -49,7 +49,7 @@ export function Signuplocador() {
         <div className="flex justify-center items-center h-screen">
           <div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
             <h2 className="text-2xl font-semibold mb-4 text-center">Cadastre-se</h2>
-            <h2 className="text-1xl font-semibold mb-4 text-center">Para alugar uma quadra</h2>
+            <h2 className="text-1xl font-semibold mb-4 text-center">Quero Anunciar uma Quadra</h2>
             <form onSubmit={handleSignup} className="flex flex-wrap">
               <div className="w-full px-2">
                 <TextInput
