@@ -48,7 +48,7 @@ export function App() {
                 <Route path="/reset" element={<ResetPasswordPage />}></Route>
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/novaQuadra" element={<IncluirQuadraPage />} />
-                <Route path="/infosQuadra/:id" element={<InfosQuadraPage />} />
+                <Route path="/infosQuadra/:idEmpresa" element={<InfosQuadraPage />} />
                 <Route path="/company" element={<CadastroEmpresaPage />} />
                 <Route path="/allocate/:id" element={<GuardedRoute><AllocatePage /></GuardedRoute>}/>
                 <Route path="/empresa"  element={<GuardedRoute><LocadorPage /></GuardedRoute>}/>
