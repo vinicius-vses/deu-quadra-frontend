@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import "leaflet/dist/images/marker-shadow.png";
 import "leaflet/dist/images/marker-icon.png";
 import { Circle, MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import { CardProps } from '../Card/Card';
 import L from 'leaflet';
+import pin from '@src/assets/pin.png';
+
 
 export interface MapProps {
   lat: number;
@@ -31,12 +33,23 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   const d = R * c; // Distance in km
   return d;
 }
-var marcador = L.icon({
-  iconUrl: 'src/pages/SimplePage/Search/pin.png',
-  iconSize: [30,30],
-});
+
 
 export function Map(props: MapProps) {
+
+  const img = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = pin;
+
+  });
+
+  var marcador = L.icon({
+    iconUrl: pin,
+    iconSize: [30,30],
+  });
+
   const map = new Set();
   return (
     <MapContainer
@@ -56,9 +69,6 @@ export function Map(props: MapProps) {
         console.log(court)
         console.log(court.idEmpresa)
         console.log(court.Empresa)
-
-
-
 
         map.add(court.idEmpresa);
         const after = map.size;
