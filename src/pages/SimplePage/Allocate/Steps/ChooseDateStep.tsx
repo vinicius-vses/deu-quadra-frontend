@@ -5,7 +5,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import ptBrLocale from '@fullcalendar/core/locales/pt-br';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Importe a biblioteca Axios
+import axios from 'axios'; 
 
 export function ChooseDateStep() {
   const [selectedRange, setSelectedRange] = useState(null);

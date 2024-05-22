@@ -1,7 +1,7 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import TextInput from '@components/TextInput';
 import { useModal } from '@src/hooks/Modal';
-import { useApi } from '@src/hooks/hooks'; // Importando o hook recém-criado
+import { useApi } from '@src/hooks/hooks'; 
 import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../../../contexts/Auth';
 import { LanguageContext } from '../../../../contexts/Language';
@@ -48,7 +48,7 @@ export function Signuplocadorcp() {
 
       if (response.status === 200) {
         console.log('USUARIO created successfully!');
-        // Handle any other logic here (e.g., redirect, display a success message)
+        
       }
     } catch (error) {
       console.error('Error creating USUARIO:', error);
@@ -56,7 +56,7 @@ export function Signuplocadorcp() {
         'ERRO AO CADASTRAR USUARIO, TENTE NOVAMENTE EM INSTANTES! ERRO:' +
           error
       );
-      // Handle error cases (e.g., display an error message)
+      
     }
   };
 

@@ -15,7 +15,7 @@ export function NavbarLoginButton() {
       <div className="flex flex-row gap-4">
         <div className="flex flex-col items-end">
           <div className="text-sm">
-            {language?.language.welcome} <span className="font-bold"> USUARIO LOCADOR</span>
+            {language?.language.welcome} <span className="font-bold"> USUARIO</span>
           </div>
           <button
             onClick={() => {

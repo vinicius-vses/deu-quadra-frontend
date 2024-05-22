@@ -214,7 +214,7 @@ onChange={(e) => setTelefone(e.target.value)}
 <button
 type="button"
 className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
-onClick={() => navigate('/empresa')}
+onClick={() => navigate('/locadorPage')}
 >
 Voltar
 </button>

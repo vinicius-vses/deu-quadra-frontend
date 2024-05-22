@@ -27,17 +27,13 @@ export function LocadorPage() {
   const [empresaData, setEmpresa] = useState([]);
 
   useEffect(() => {
-    // Faz a requisição para o endpoint
+    
     axios.get('http://18.212.67.172:8080/companies/empresa/' + idUsuario)
     //axios.get('http://localhost:8080/companies/empresa/' + idUsuario)
         .then((response) => {
-        // Atualiza o estado com os dados recebidos
-        //setCourtsData(response.data.courtsModelList);
+        
         nomeEmpresa = response.data.nome;
-        // setEmpresa(response.data.nome);
-        // setEmpresa(response.data.bairro);
-        // setEmpresa(response.data.rua);
-        // setEmpresa(response.data.numero);
+        
         setEmpresa(response.data);
         console.log(response.data);
         console.log(empresaData);

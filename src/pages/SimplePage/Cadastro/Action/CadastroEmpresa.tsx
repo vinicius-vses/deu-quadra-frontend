@@ -99,7 +99,6 @@ export function CadastroEmpresa() {
     const { value } = event.target;
     setCep(value);
 
-    // Verifica se o CEP possui 8 dígitos e contém apenas números
     if (/^\d{8}$/.test(value)) {
       fetchAddressFromCEP(value);
     } else {
@@ -109,7 +108,7 @@ export function CadastroEmpresa() {
 
   const handleOkClick = () => {
     setSuccessMessage('');
-    navigate('/'); // Pode ser redirecionado para a página desejada após clicar em "OK"
+    navigate('/locadorPage');
   };
 
   return (
@@ -197,60 +196,60 @@ export function CadastroEmpresa() {
                   value={cidade}
                   onChange={(e) => setCidade(e.target.value)}
                   placeholder="Informe a cidade"
-                  />
-                  </div>
-                  <div className="w-full px-2 md:w-1/2">
-                  <TextInput
+                />
+              </div>
+              <div className="w-full px-2 md:w-1/2">
+                <TextInput
                   label="Latitude"
                   type="text"
                   id="latitude"
                   value={latitude}
                   onChange={(e) => setLatitude(e.target.value)}
                   placeholder="Latitude"
-                  />
-                  </div>
-                  <div className="w-full px-2 md:w-1/2">
-                  <TextInput
+                />
+              </div>
+              <div className="w-full px-2 md:w-1/2">
+                <TextInput
                   label="Longitude"
                   type="text"
                   id="longitude"
                   value={longitude}
                   onChange={(e) => setLongitude(e.target.value)}
                   placeholder="Longitude"
-                  />
-                  </div>
-                  <div className="w-full px-2 mt-3">
-                  <div className="flex justify-between">
+                />
+              </div>
+              <div className="w-full px-2 mt-3">
+                <div className="flex justify-between">
                   <button
-                  type="button"
-                  className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
-                  onClick={() => navigate(-1)}
+                    type="button"
+                    className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
+                    onClick={() => navigate('/locadorPage')}
                   >
-                  Voltar
+                    Voltar
                   </button>
                   <button
-                                   type="submit"
-                                   className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
-                                 >
-                  Cadastrar
+                    type="submit"
+                    className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
+                  >
+                    Cadastrar
                   </button>
-                  </div>
-                  </div>
-                  </form>
-                  {error && <p className="text-red-500 text-center">{error}</p>}
-                  </div>
-                  </div>
-                  )}
-                  {successMessage && (
-                  <div className="flex justify-center items-center h-screen">
-                  <div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full sm:w-4/4 md:w-3/2 lg:w-3/3 xl:w-5/4 text-center">
-                  <p className="text-green-800 text-xl mb-4" style={{ whiteSpace: "nowrap" }}>{successMessage}</p>
-                  <button className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600" onClick={handleOkClick}>
-                  OK
-                  </button>
-                  </div>
-                  </div>
-                  )}
-                  </>
-                  );
-                  }
+                </div>
+              </div>
+            </form>
+            {error && <p className="text-red-500 text-center">{error}</p>}
+          </div>
+        </div>
+      )}
+      {successMessage && (
+        <div className="flex justify-center items-center h-screen">
+          <div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full sm:w-4/4 md:w-3/2 lg:w-3/3 xl:w-5/4 text-center">
+            <p className="text-green-800 text-xl mb-4" style={{ whiteSpace: "nowrap" }}>{successMessage}</p>
+            <button className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600" onClick={handleOkClick}>
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

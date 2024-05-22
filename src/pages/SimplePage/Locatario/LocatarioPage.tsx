@@ -32,12 +32,12 @@ export function LocatarioPage() {
       }
     };
 
-    getLocation(); // Chame a função para obter a localização do usuário
+    getLocation(); 
 
-    // Faz a requisição para o endpoint
+    
     axios.get(`http://18.212.67.172:8080/companies/empresa/${idUsuario}`)
       .then((response) => {
-        // Atualiza o estado com os dados recebidos
+       
         setEmpresa(response.data);
       })
       .catch((error) => {
