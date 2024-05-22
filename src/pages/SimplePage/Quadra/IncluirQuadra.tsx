@@ -20,7 +20,7 @@ export function IncluirQuadraPage() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://3.234.183.45:8080/courts', {
+      const response = await axios.post('http://18.212.67.172:8080/courts', {
         nome: courtName,
         imagemUrl: courtImageUrl,
         preco: courtPrice,
