@@ -4,9 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import ptBrLocale from '@fullcalendar/core/locales/pt-br';
-import Navbar from '../../../components/Navbar/Navbar';
-
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Importe a biblioteca Axios
 
 export function ChooseDateStep() {
   const [selectedRange, setSelectedRange] = useState(null);
@@ -24,10 +23,8 @@ export function ChooseDateStep() {
     updateCalendarHeight();
 
     window.addEventListener('resize', updateCalendarHeight);
-    
 
     return () => {
-      
       window.removeEventListener('resize', updateCalendarHeight);
     };
   }, []);
@@ -42,16 +39,32 @@ export function ChooseDateStep() {
       const eventName = window.prompt('Nome do evento:');
       if (eventName) {
         setScheduledEvent({
-          start: selectInfo.start.toLocaleString('pt-BR'), // Formatar a data de início
-          end: selectInfo.end.toLocaleString('pt-BR'), // Formatar a data de fim
+          start: selectedRange.start.toLocaleString('pt-BR'),
+          end: selectedRange.end.toLocaleString('pt-BR'),
           name: eventName
         });
+
+        // Enviar a reserva para o backend
+        sendReservationToBackend(selectedRange.start, selectedRange.end, eventName);
       }
     }
   };
 
+  const sendReservationToBackend = async (start, end, eventName) => {
+    try {
+      // Envie a reserva para o backend
+      const response = await axios.post('http://18.212.67.172:8080/reservas', {
+        start: start,
+        end: end,
+        name: eventName
+      });
+      console.log('Reserva enviada com sucesso:', response.data);
+    } catch (error) {
+      console.error('Erro ao enviar reserva:', error);
+    }
+  };
+
   return (
-    
     <div className="h-screen flex flex-col justify-center items-center">
       <div className="p-6 bg-white shadow-md rounded-lg mb-3 w-full max-w-screen-lg">
         <h2 className="text-center mb-4">Agendamento</h2>
@@ -69,17 +82,16 @@ export function ChooseDateStep() {
             center: 'prev,next today',
             end: 'dayGridMonth,timeGridWeek,timeGridDay'
           }}
-          eventColor="#0078d4" // Cor dos eventos
-          eventTextColor="#ffffff" // Cor do texto dos eventos
-          dayMaxEventRows={true} // Exibir várias linhas de eventos no mesmo dia
-          slotMinTime="06:00:00" // Horário mínimo no grid de tempo
-          slotMaxTime="22:00:00" // Horário máximo no grid de tempo
-          dayHeaderFormat={{ weekday: 'short', month: 'numeric', day: 'numeric' }} // Formato do cabeçalho do dia
+          eventColor="#0078d4"
+          eventTextColor="#ffffff"
+          dayMaxEventRows={true}
+          slotMinTime="06:00:00"
+          slotMaxTime="22:00:00"
+          dayHeaderFormat={{ weekday: 'short', month: 'numeric', day: 'numeric' }}
           dayHeaderContent={(arg) => (
             <div className="fc-daygrid-day-number" style={{ fontSize: '10px' }}>{arg.text}</div>
           )}
-          slotLabelFormat={null} // Remover o campo 5 – 11 de mai. de 2024 no topo do calendário
-          // Estilos que se assemelham ao Material Design
+          slotLabelFormat={null}
           themeClassNames={{
             headerToolbar: 'fc-toolbar-material',
             table: 'fc-table-material',
@@ -115,7 +127,7 @@ export function ChooseDateStep() {
         )}
         <div className="mt-4 flex justify-between">
           <Link to="/" className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Voltar</Link>
-          <button onClick={() => navigate('/empresa/1')} className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Próximo</button>
+          <button onClick={() => navigate('/empresa')} className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Próximo</button>
         </div>
       </div>
     </div>

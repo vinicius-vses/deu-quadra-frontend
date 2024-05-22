@@ -44,6 +44,10 @@ export function IncluirQuadraPage() {
     }
   };
 
+  const handleBackClick = () => {
+    navigate(-1); // Navega para a página anterior
+  };
+
   return (
     <SimplePage>
       <div className="flex-center bg-green-300">
@@ -90,12 +94,21 @@ export function IncluirQuadraPage() {
             {isLoading ? (
               <p>Enviando dados...</p>
             ) : (
-              <button
-                type="submit"
-                className="bg-green-500 text-white p-2 rounded-md mx-auto hover:bg-blue-600"
-              >
-                CADASTRAR
-              </button>
+              <div className="flex justify-between">
+                
+                <button
+                  onClick={handleBackClick}
+                  className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
+                >
+                  Voltar
+                </button>
+                <button
+                  type="submit"
+                  className="bg-green-500 text-white p-2 rounded-md hover:bg-blue-600"
+                >
+                  CADASTRAR
+                </button>
+              </div>
             )}
             {error && <p className="text-red-500">{error}</p>}
           </form>

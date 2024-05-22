@@ -81,6 +81,12 @@ export function LocadorPage() {
             Minhas Quadras
           </Link>
           </div>
+          <Link
+            to={'/minhasreservas/'} 
+            className="px-5 py-2 text-green-600 border rounded-sm border-green-500 hover:bg-green-500 hover:text-white"
+          >
+            Minhas Reservas
+          </Link>
           <div className="flex items-center">
             <Link
             to={'/editcadastro/'}
@@ -95,6 +101,7 @@ export function LocadorPage() {
           >
             Incluir Quadra
           </Link>
+          
 </div>
 
       

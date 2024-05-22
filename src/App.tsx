@@ -25,6 +25,8 @@ import { PresignupPage } from './pages/SimplePage/Login/PresignupPage';
 import { Signuplocadorpage } from './pages/SimplePage/Login/Signuplocadorpage';
 import {CadastroEmpresaPage} from './pages/SimplePage/Cadastro/CadastroEmpresaPage';
 import {EditcadastroPage} from './pages/SimplePage/Cadastro/EditcadastroPage';
+import { MinhasreservasPage } from "./pages/SimplePage/Reservas/MinhasreservasPage";
+
 
 
 
@@ -53,6 +55,7 @@ export function App() {
                 <Route path="/allocate/:id" element={<GuardedRoute><AllocatePage /></GuardedRoute>}/>
                 <Route path="/empresa"  element={<GuardedRoute><LocadorPage /></GuardedRoute>}/>
                 <Route path="/editcadastro"  element={<GuardedRoute><EditcadastroPage /></GuardedRoute>}/>
+                <Route path="/minhasreservas"  element={<MinhasreservasPage />}/>
               </Routes>
             </Router>
           </AuthenticationContext.Provider>
