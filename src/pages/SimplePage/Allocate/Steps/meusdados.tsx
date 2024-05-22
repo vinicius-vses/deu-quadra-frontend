@@ -42,8 +42,8 @@ export function ChooseDateStep() {
       const eventName = window.prompt('Nome do evento:');
       if (eventName) {
         setScheduledEvent({
-          start: selectInfo.start.toLocaleString('pt-BR'), // Formatar a data de início
-          end: selectInfo.end.toLocaleString('pt-BR'), // Formatar a data de fim
+          start: selectInfo.start.toLocaleString('pt-BR'), 
+          end: selectInfo.end.toLocaleString('pt-BR'), 
           name: eventName
         });
       }
@@ -69,17 +69,17 @@ export function ChooseDateStep() {
             center: 'prev,next today',
             end: 'dayGridMonth,timeGridWeek,timeGridDay'
           }}
-          eventColor="#0078d4" // Cor dos eventos
-          eventTextColor="#ffffff" // Cor do texto dos eventos
-          dayMaxEventRows={true} // Exibir várias linhas de eventos no mesmo dia
-          slotMinTime="06:00:00" // Horário mínimo no grid de tempo
-          slotMaxTime="22:00:00" // Horário máximo no grid de tempo
-          dayHeaderFormat={{ weekday: 'short', month: 'numeric', day: 'numeric' }} // Formato do cabeçalho do dia
+          eventColor="#0078d4" 
+          eventTextColor="#ffffff"
+          dayMaxEventRows={true} 
+          slotMinTime="06:00:00" 
+          slotMaxTime="22:00:00" 
+          dayHeaderFormat={{ weekday: 'short', month: 'numeric', day: 'numeric' }} 
           dayHeaderContent={(arg) => (
             <div className="fc-daygrid-day-number" style={{ fontSize: '10px' }}>{arg.text}</div>
           )}
-          slotLabelFormat={null} // Remover o campo 5 – 11 de mai. de 2024 no topo do calendário
-          // Estilos que se assemelham ao Material Design
+          slotLabelFormat={null} 
+         
           themeClassNames={{
             headerToolbar: 'fc-toolbar-material',
             table: 'fc-table-material',

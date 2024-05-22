@@ -9,7 +9,7 @@ import { LanguageContext } from '../../../../contexts/Language';
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('locador'); // Default to 'locador'
+  const [userType, setUserType] = useState('locador'); 
 
   const auth = useContext(AuthenticationContext);
   const navigate = useNavigate();
@@ -34,13 +34,13 @@ export function Login() {
         response = await loginLocador(email, password);
         console.log('Locador Response:', response);
         if (response.status === 200 && response.data) {
-          authToken = response.data; // Para locador, o JWT é retornado diretamente
+          authToken = response.data; 
         }
       } else if (userType === 'locatario') {
         response = await loginLocatario(email, password);
         console.log('Locatario Response:', response);
         if (response.status === 200 && response.data) {
-          authToken = response.data.authToken; // Para locatario, o JWT está dentro de `response.data.authToken`
+          authToken = response.data.authToken; 
         }
       }
 
@@ -48,10 +48,10 @@ export function Login() {
         auth!.setTokens({
           authToken: {
             token: authToken,
-            expiresIn: new Date(Date.now() + 3600 * 1000), // Ajuste o tempo de expiração conforme necessário
+            expiresIn: new Date(Date.now() + 3600 * 1000), 
           },
           refreshToken: {
-            expiresIn: new Date(Date.now() + 3600 * 1000), // Ajuste o tempo de expiração conforme necessário
+            expiresIn: new Date(Date.now() + 3600 * 1000), 
             token: 'a',
           },
         });
@@ -65,7 +65,7 @@ export function Login() {
         openModal('Erro', 'Erro desconhecido ao fazer login');
       }
     } catch (error) {
-      console.error('Login Error:', error); // Adicionado para capturar e imprimir o erro
+      console.error('Login Error:', error); 
       openModal('Erro', error.response ? error.response.data.message : 'Erro desconhecido ao fazer login');
     }
   };
