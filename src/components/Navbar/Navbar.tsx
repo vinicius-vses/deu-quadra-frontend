@@ -4,7 +4,7 @@ import { Logo } from '../Logo';
 import { AuthenticationContext } from '../../contexts/Auth';
 import { NavbarLoginButton } from './NavbarLoginButton';
 import LanguageSelector from './LanguageSelector';
-import TopMenu from './TopMenu'; // Importe o componente TopMenu
+import TopMenu from './TopMenu'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
@@ -40,12 +40,12 @@ function Navbar({ className }: NavbarProps) {
         }`}
       >
         <div className="container max-w-screen-lg mx-auto px-10 h-full flex items-center justify-between">
-          <Link to="/" className="flex items-center"> {/* Adicionado classe flex e items-center */}
-            <Logo lightMode={true} className="mr-auto" /> {/* Adicionado classe mr-auto para mover o logo para a esquerda */}
-            <TopMenu /> {/* Renderize o componente TopMenu aqui */}
+          <Link to="/" className="flex items-center"> 
+            <Logo lightMode={true} className="mr-auto" /> 
+            <TopMenu /> 
           </Link>
           <div className="hidden md:flex items-center">
-            <div className="ml-auto"> {/* Mova este div para a direita */}
+            <div className="ml-auto"> 
               <NavbarLoginButton />
               {!auth.isAuthenticated && (
                 <Link to="/presignup" className="text-white ml-4">Cadastre-se</Link>
@@ -75,7 +75,7 @@ function BottomMenu() {
             Menu <FontAwesomeIcon icon={faAngleUp} className={`ml-1 ${showDropdown ? 'rotate-180' : ''}`} />
           </span>
           {showDropdown && (
-            <div className="dropdown-menu absolute bg-white shadow-md border border-gray-200 bottom-full left-0 w-48"> {/* Aumenta a largura para w-48 */}
+            <div className="dropdown-menu absolute bg-white shadow-md border border-gray-200 bottom-full left-0 w-48"> 
               <Link to="/" className="text-black hover:text-gray-800 block py-1 px-4">Home</Link>
               <Link to="/locadorPage" className="text-black hover:text-gray-800 block py-1 px-4">Área do Locador</Link>
               <Link to="/locatarioPage" className="text-black hover:text-gray-800 block py-1 px-4">Área do Locatário</Link>
