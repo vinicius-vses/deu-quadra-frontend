@@ -76,10 +76,10 @@ function BottomMenu() {
           </span>
           {showDropdown && (
             <div className="dropdown-menu absolute bg-white shadow-md border border-gray-200 bottom-full left-0 w-48"> 
-              <Link to="/" className="text-black hover:text-gray-800 block py-1 px-4">Home</Link>
+              <Link to="/" className="text-black hover:text-gray-800 block py-1 px-4">Página Inical </Link>
               <Link to="/locadorPage" className="text-black hover:text-gray-800 block py-1 px-4">Área do Locador</Link>
               <Link to="/locatarioPage" className="text-black hover:text-gray-800 block py-1 px-4">Área do Locatário</Link>
-              <Link to="/search" className="text-black hover:text-gray-800 block py-1 px-4">Search</Link>
+              <Link to="/search" className="text-black hover:text-gray-800 block py-1 px-4">Buscar</Link>
             </div>
           )}
         </div>
