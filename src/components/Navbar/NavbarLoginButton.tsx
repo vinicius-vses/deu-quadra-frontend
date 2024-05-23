@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { AuthenticationContext } from '../../contexts/Auth';
 import defaultPhoto from '@src/assets/default_photo.jpg';
 import { Link, useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ export function NavbarLoginButton() {
           </button>
         </div>
         <div>
-          <img src={defaultPhoto} className="w-[35px] rounded-full" alt="" />
+          <img src={defaultPhoto} className="w-[35px] rounded-full mr-4" alt="" /> {/* Adicionada margem à direita */}
         </div>
       </div>
     );
