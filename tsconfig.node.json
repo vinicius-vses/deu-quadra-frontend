@@ -4,7 +4,9 @@
     "paths": {
       "@components/*": ["components/*"],
       "@src/*": ["src/*"],
+      "composite": ["true"],
       "@pages/*": ["pages/*"]
+      
     }
   },
   "include": ["vite.config.ts", "src"]
